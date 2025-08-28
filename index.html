@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Developer Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2C9B92',
+                        secondary: '#FF6B6B',
+                        light: '#F9F7F7',
+                        accent: '#DBE2EF',
+                        dark: '#333333'
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+            color: #333333;
+        }
+        
+        .glass-effect {
+            background: rgba(249, 247, 247, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        
+        .skill-card, .project-card, .education-card {
+            transition: all 0.4s ease;
+        }
+        
+        .skill-card:hover, .project-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .flip-card {
+            perspective: 1000px;
+        }
+        
+        .flip-card-inner {
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        
+        .flip-card:hover .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+        
+        .flip-card-front, .flip-card-back {
+            backface-visibility: hidden;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .flip-card-back {
+            transform: rotateY(180deg);
+            background: linear-gradient(135deg, #2C9B92 0%, #1a7169 100%);
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .nav-active {
+            color: #2C9B92;
+            font-weight: 600;
+        }
+        
+        .progress-bar {
+            transition: width 2s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-light to-accent">
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass-effect py-4">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-primary">DevPortfolio</a>
+            <div class="hidden md:flex space-x-10">
+                <a href="#home" class="nav-link hover:text-primary transition">Home</a>
+                <a href="#about" class="nav-link hover:text-primary transition">About</a>
+                <a href="#skills" class="nav-link hover:text-primary transition">Skills</a>
+                <a href="#education" class="nav-link hover:text-primary transition">Education</a>
+                <a href="#projects" class="nav-link hover:text-primary transition">Projects</a>
+                <a href="#experience" class="nav-link hover:text-primary transition">Experience</a>
+                <a href="#contact" class="nav-link hover:text-primary transition">Contact</a>
+            </div>
+            <div class="md:hidden">
+                <button id="menu-btn" class="text-primary">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden glass-effect md:hidden px-6 pt-2 pb-4">
+            <div class="flex flex-col space-y-3 mt-3">
+                <a href="#home" class="nav-link hover:text-primary transition">Home</a>
+                <a href="#about" class="nav-link hover:text-primary transition">About</a>
+                <a href="#skills" class="nav-link hover:text-primary transition">Skills</a>
+                <a href="#education" class="nav-link hover:text-primary transition">Education</a>
+                <a href="#projects" class="nav-link hover:text-primary transition">Projects</a>
+                <a href="#experience" class="nav-link hover:text-primary transition">Experience</a>
+                <a href="#contact" class="nav-link hover:text-primary transition">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center pt-20 pb-10">
+        <div class="container mx-auto px-6 flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-10 md:mb-0">
+                <div class="relative">
+                    <div class="w-64 h-64 mx-auto md:mx-0 rounded-full bg-primary/20 absolute -z-10 top-0 left-0 mt-6 ml-6 animate-float"></div>
+                    <img src="pic.jpg" 
+                         alt="Profile Picture" 
+                         class="w-64 h-64 mx-auto md:mx-0 rounded-full object-cover border-4 border-white shadow-xl">
+                </div>
+            </div>
+            <div class="md:w-1/2 text-center md:text-left">
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">Muhammad <span class="text-primary">Anus Imran</span></h1>
+                <h2 class="text-2xl md:text-3xl text-gray-600 mb-6">Web Developer | Data Entry Specialist</h2>
+                <p class="text-lg text-gray-600 mb-8 max-w-md mx-auto md:mx-0">Crafting digital experiences with precision and code</p>
+                <div class="flex space-x-4 justify-center md:justify-start">
+                    <a href="#projects" class="px-6 py-3 bg-primary text-white rounded-lg shadow hover:bg-[#1a7169] transition">View My Work</a>
+                    <a href="#contact" class="px-6 py-3 border border-primary text-primary rounded-lg shadow hover:bg-primary/10 transition">Contact Me</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Me -->
+    <section id="about" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center mb-4">About Me</h2>
+            <div class="w-20 h-1 bg-primary mx-auto mb-12"></div>
+            
+            <div class="max-w-3xl mx-auto text-center">
+                <p class="text-lg text-gray-600 mb-6">
+                    I am a passionate Web Developer with a strong foundation in HTML5, CSS, Tailwind CSS, JavaScript, PHP, and Java.
+                </p>
+                <p class="text-lg text-gray-600 mb-6">
+                   I have hands-on experience with MySQL, PostgreSQL, and MongoDB, as well as frontend and backend academic projects.
+                </p>
+                <p class="text-lg text-gray-600">
+                    My adaptability, eagerness to learn, and clean coding practices make me well-suited to contribute effectively as a developer.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills" class="py-20 bg-gradient-to-br from-accent/50 to-primary/20">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center mb-4">My Skills</h2>
+            <div class="w-20 h-1 bg-primary mx-auto mb-12"></div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Skill 1 -->
+                <div class="skill-card glass-effect rounded-xl p-6 shadow-lg">
+                    <div class="text-primary text-4xl mb-4">
+                        <i class="fab fa-html5"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">HTML</h3>
+                    <div class="w-full bg-gray-200 rounded-full h-2.5">
+                        <div class="bg-primary h-2.5 rounded-full progress-bar" style="width: 0%" data-width="95%"></div>
+                    </div>
+                    <p class="mt-2 text-gray-600">Advanced level with semantic HTML5</p>
+                </div>
+                
+                <!-- Skill 2 -->
+                <div class="skill-card glass-effect rounded-xl p-6 shadow-lg">
+                    <div class="text-primary text-4xl mb-4">
+                        <i class="fab fa-css3-alt"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">CSS & Tailwind</h3>
+                    <div class="w-full bg-gray-200 rounded-full h-2.5">
+                        <div class="bg-primary h-2.5 rounded-full progress-bar" style="width: 0%" data-width="90%"></div>
+                    </div>
+                    <p class="mt-2 text-gray-600">Modern styling with Flexbox, Grid and Tailwind</p>
+                </div>
+                
+                <!-- Skill 3 -->
+                <div class="skill-card glass-effect rounded-xl p-6 shadow-lg">
+                    <div class="text-primary text-4xl mb-4">
+                        <i class="fab fa-php"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">PHP</h3>
+                    <div class="w-full bg-gray-200 rounded-full h-2.5">
+                        <div class="bg-primary h-2.5 rounded-full progress-bar" style="width: 0%" data-width="85%"></div>
+                    </div>
+                    <p class="mt-2 text-gray-600">Backend development with Laravel</p>
+                </div>
+                
+                <!-- Skill 4 -->
+                <div class="skill-card glass-effect rounded-xl p-6 shadow-lg">
+                    <div class="text-primary text-4xl mb-4">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">MySQL & PostgreSQL</h3>
+                    <div class="w-full bg-gray-200 rounded-full h-2.5">
+                        <div class="bg-primary h-2.5 rounded-full progress-bar" style="width: 0%" data-width="88%"></div>
+                    </div>
+                    <p class="mt-2 text-gray-600">Database design and optimization</p>
+                </div>
+                
+                <!-- Skill 5 -->
+                <div class="skill-card glass-effect rounded-xl p-6 shadow-lg">
+                    <div class="text-primary text-4xl mb-4">
+                        <i class="fas fa-keyboard"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Data Entry</h3>
+                    <div class="w-full bg-gray-200 rounded-full h-2.5">
+                        <div class="bg-secondary h-2.5 rounded-full progress-bar" style="width: 0%" data-width="98%"></div>
+                    </div>
+                    <p class="mt-2 text-gray-600">Fast and accurate data processing</p>
+                </div>
+                
+                <!-- Skill 6 -->
+                <div class="skill-card glass-effect rounded-xl p-6 shadow-lg">
+                    <div class="text-primary text-4xl mb-4">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Web Development</h3>
+                    <div class="w-full bg-gray-200 rounded-full h-2.5">
+                        <div class="bg-primary h-2.5 rounded-full progress-bar" style="width: 0%" data-width="92%"></div>
+                    </div>
+                    <p class="mt-2 text-gray-600">Full-stack development solutions</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education -->
+    <section id="education" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center mb-4">Education</h2>
+            <div class="w-20 h-1 bg-primary mx-auto mb-12"></div>
+            
+            <div class="max-w-3xl mx-auto">
+                <!-- Education 1 -->
+                <div class="education-card mb-10 glass-effect rounded-xl p-6 shadow-lg border-l-4 border-primary">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3 class="text-xl font-semibold">Bachelor in Computer Science (Current)</h3>
+                            <p class="text-primary">Gift University</p>
+                        </div>
+                        <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm">2023 - 2025</span>
+                    </div>
+                    <p class="mt-4 text-gray-600">Currently enrolled in BSCS (4th Semester) with CGPA 3.7, focusing on Web Development and Databases.</p>
+                </div>
+                
+                <!-- Education 2 -->
+                <div class="education-card mb-10 glass-effect rounded-xl p-6 shadow-lg border-l-4 border-primary">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3 class="text-xl font-semibold">FSc Pre-Engineering</h3>
+                            <p class="text-primary">Kips College</p>
+                        </div>
+                        <span class="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm">2021 - 2023</span>
+                    </div>
+                    <p class="mt-4 text-gray-600">Completed FSc Pre-Engineering with focus on Mathematics, Physics, and Computer Science.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects" class="py-20 bg-gradient-to-br from-accent/50 to-primary/20">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center mb-4">My Projects</h2>
+            <div class="w-20 h-1 bg-primary mx-auto mb-12"></div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1 -->
+                <div class="flip-card h-80">
+                    <div class="flip-card-inner h-full rounded-xl">
+                        <div class="flip-card-front glass-effect rounded-xl p-6 shadow-lg flex flex-col justify-center items-center">
+                            <div class="text-primary text-4xl mb-4"><i class="fas fa-car"></i></div>
+                            <h3 class="text-xl font-semibold mb-2">Vehicle Rental Management System</h3>
+                            <p class="text-gray-600 text-center">Database design & optimization with PostgreSQL</p>
+                        </div>
+                        <div class="flip-card-back rounded-xl p-6 shadow-lg flex flex-col justify-center">
+                            <h3 class="text-xl font-semibold mb-2 text-white">Vehicle Rental Management System</h3>
+                            <p class="text-gray-200 mb-4">Designed schema in PostgreSQL, applied normalization & indexing, and optimized queries for large datasets.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="flip-card h-80">
+                    <div class="flip-card-inner h-full rounded-xl">
+                        <div class="flip-card-front glass-effect rounded-xl p-6 shadow-lg flex flex-col justify-center items-center">
+                            <div class="text-primary text-4xl mb-4"><i class="fas fa-users-cog"></i></div>
+                            <h3 class="text-xl font-semibold mb-2">HR Management System</h3>
+                            <p class="text-gray-600 text-center">Frontend in HTML/CSS/JS + Backend in PHP</p>
+                        </div>
+                        <div class="flip-card-back rounded-xl p-6 shadow-lg flex flex-col justify-center">
+                            <h3 class="text-xl font-semibold mb-2 text-white">HR Management System</h3>
+                            <p class="text-gray-200 mb-4">Designed workflows, developed frontend (HTML, CSS, JS), integrated with PHP backend, deployed on XAMPP localhost.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 3 -->
+                <div class="flip-card h-80">
+                    <div class="flip-card-inner h-full rounded-xl">
+                        <div class="flip-card-front glass-effect rounded-xl p-6 shadow-lg flex flex-col justify-center items-center">
+                            <div class="text-primary text-4xl mb-4"><i class="fas fa-gamepad"></i></div>
+                            <h3 class="text-xl font-semibold mb-2">Neon Gaming Web Page</h3>
+                            <p class="text-gray-600 text-center">Frontend with animations & Tailwind CSS</p>
+                        </div>
+                        <div class="flip-card-back rounded-xl p-6 shadow-lg flex flex-col justify-center">
+                            <h3 class="text-xl font-semibold mb-2 text-white">Neon Gaming Web Page</h3>
+                            <p class="text-gray-200 mb-4">Created responsive UI with neon styling, animations, and interactivity using HTML, Tailwind, and JavaScript.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="flip-card h-80">
+                    <div class="flip-card-inner h-full rounded-xl">
+                        <div class="flip-card-front glass-effect rounded-xl p-6 shadow-lg flex flex-col justify-center items-center">
+                            <div class="text-primary text-4xl mb-4"><i class="fas fa-shopping-cart"></i></div>
+                            <h3 class="text-xl font-semibold mb-2">E-Commerce Frontend</h3>
+                            <p class="text-gray-600 text-center">Frontend design with cart functionality</p>
+                        </div>
+                        <div class="flip-card-back rounded-xl p-6 shadow-lg flex flex-col justify-center">
+                            <h3 class="text-xl font-semibold mb-2 text-white">E-Commerce Frontend</h3>
+                            <p class="text-gray-200 mb-4">Built a modern e-commerce frontend with product listing, shopping cart, and responsive UI.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Academic Work & University Experience -->
+    <section id="experience" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center mb-4">Academic Work & University Experience</h2>
+            <div class="w-20 h-1 bg-primary mx-auto mb-12"></div>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="glass-effect rounded-xl p-6 shadow-lg mb-8">
+                    <h3 class="text-xl font-semibold mb-2">Front End Developer (Academic)</h3>
+                    <p class="text-primary mb-2">Gift University • 2023 – 2025</p>
+                    <p class="text-gray-600">Developed a Neon Gaming Web Page with responsive UI, Tailwind CSS, and JavaScript interactivity.</p>
+                </div>
+                
+                <div class="glass-effect rounded-xl p-6 shadow-lg">
+                    <h3 class="text-xl font-semibold mb-2">Backend Developer (Academic)</h3>
+                    <p class="text-primary mb-2">Gift University • 2024 – 2025</p>
+                    <p class="text-gray-600">Worked on MySQL, PostgreSQL, phpMyAdmin, and basic MongoDB. Built CRUD operations with backend connectivity.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Contact -->
+    <section id="contact" class="py-20 bg-gradient-to-br from-accent/50 to-primary/20">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center mb-4">Get In Touch</h2>
+            <div class="w-20 h-1 bg-primary mx-auto mb-12"></div>
+            
+            <div class="max-w-lg mx-auto glass-effect rounded-xl p-8 shadow-lg">
+                <form>
+                    <div class="mb-6">
+                        <label for="name" class="block text-gray-700 mb-2">Name</label>
+                        <input type="text" id="name" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary">
+                    </div>
+                    
+                    <div class="mb-6">
+                        <label for="email" class="block text-gray-700 mb-2">Email</label>
+                        <input type="email" id="email" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary">
+                    </div>
+                    
+                    <div class="mb-6">
+                        <label for="message" class="block text-gray-700 mb-2">Message</label>
+                        <textarea id="message" rows="5" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary"></textarea>
+                    </div>
+                    
+                    <button type="submit" class="w-full bg-primary text-white py-3 rounded-lg hover:bg-[#1a7169] transition">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-10 bg-dark text-white">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <p class="text-xl font-bold">Muhammad Anus Imran</p>
+                    <p class="text-gray-400">Web Developer | Data Entry Specialist</p>
+                </div>
+                
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-white transition">
+                        <i class="fab fa-github text-2xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition">
+                        <i class="fab fa-linkedin text-2xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition">
+                        <i class="fas fa-envelope text-2xl"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 Muhammad Anus Imran. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('menu-btn').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    document.getElementById('mobile-menu').classList.add('hidden');
+                }
+            });
+        });
+        
+        // Animation on scroll
+        function checkScroll() {
+            const elements = document.querySelectorAll('.fade-in');
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.3;
+                
+                if (elementPosition < screenPosition) {
+                    element.classList.add('visible');
+                }
+            });
+            
+            // Animate skill bars
+            const skillBars = document.querySelectorAll('.progress-bar');
+            skillBars.forEach(bar => {
+                const width = bar.getAttribute('data-width');
+                if (bar.getBoundingClientRect().top < window.innerHeight) {
+                    bar.style.width = width;
+                }
+            });
+        }
+        
+        window.addEventListener('scroll', checkScroll);
+        window.addEventListener('load', checkScroll);
+        
+        // Update active nav link on scroll
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-link');
+        
+        window.addEventListener('scroll', function() {
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (pageYOffset >= (sectionTop - 100)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('nav-active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('nav-active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
